@@ -1,8 +1,9 @@
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
     devtool: 'sourcemap',
-    entry: './src/index.js',
+    entry: './src/web/index.js',
     output: {
         filename: './dist/bundle.js'
     },

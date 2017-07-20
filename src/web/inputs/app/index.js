@@ -4,18 +4,20 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import Player from './../containers/player';
 
-class HomePage extends React.Component {
+class App extends React.Component {
     render() {
         return(
             <div>
-                <h1>Hello world</h1>
+                <Player/>
+                {this.props.children}
             </div>
         )
     }
 }
 
-HomePage.propTypes = {
+App.propTypes = {
 
 };
 
@@ -32,6 +34,6 @@ const mapDispatchToProps = {
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(HomePage);
+    null,
+    null
+)(App);

@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({'extended':'true'}));
 app.use(bodyParser.json());
 
 /**
- * Nunjucks for serving html pages
+ * Nunjucks for serving html containers
  */
 nunjucks.configure(path.join(__dirname, '..', '/core/views'), {
     autoescape: true,
