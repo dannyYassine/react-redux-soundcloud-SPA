@@ -50,9 +50,9 @@ const Users = props => (
 export const AppRouter = () => (
     <BrowserRouter>
         <div>
-            <Route path="/" component={Nav}/>
             <Route path="/" children={() => (
                 <App>
+                    <Route path="/" component={Nav}/>
                     <Switch>
                         <Route exact path="/" component={HomeComp}/>
                         <Route exact path="/users" component={Users}/>

@@ -14,7 +14,6 @@ export const initialStore = {
     },
     auth_token: null,
     loggedInUser: {},
-    currentTrack: null,
     player: {
         track: null,
         isPlaying: false,

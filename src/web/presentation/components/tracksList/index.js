@@ -18,11 +18,11 @@ export default class TracksList extends React.Component {
             />
         ));
 
-        return(
+        return (
             <div>
                 {tracks}
             </div>
-        )
+        );
     }
 }
 

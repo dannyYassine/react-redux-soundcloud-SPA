@@ -12,7 +12,7 @@ export const trackActions = {
             payload: {
                 track: track
             }
-        }
+        };
     }
 
 };

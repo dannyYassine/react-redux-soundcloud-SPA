@@ -11,7 +11,7 @@ export const tracksActions = {
     fetchTracks: () => {
         return {
             type: tracksActions.FETCH_TRACKS
-        }
+        };
     },
 
     fetchTracksSuccess: (tracks) => {
@@ -21,13 +21,13 @@ export const tracksActions = {
                 isLoading: false,
                 tracks: tracks
             }
-        }
+        };
     },
 
     fetchTracksError: () => {
         return {
             type: tracksActions.FETCH_TRACKS_ERROR
-        }
+        };
     },
 
     selectedTrack: (track) => {
@@ -36,7 +36,7 @@ export const tracksActions = {
             payload: {
                 track: track
             }
-        }
+        };
     }
 
 };
@@ -48,9 +48,28 @@ export const getTracks = function() {
                 return response.json();
             }).then((json) => {
                 dispatch(tracksActions.fetchTracksSuccess(json));
-            }).catch(() => {
+                resolve(json);
+            }).catch((error) => {
                 dispatch(tracksActions.fetchTracksError());
+                reject(error);
             });
         });
-    }
+    };
+};
+
+export const getSearchTracks = function(queryString) {
+    return function (dispatch, getState) {
+        return new Promise((resolve, reject) => {
+            let uriQueryString = encodeURI(queryString);
+            fetch(`https://api.soundcloud.com/tracks?q=${uriQueryString}&client_id=ShH74NlijJdrezMwJlhCWxRr4TlUqG3U`).then((response) => {
+                return response.json();
+            }).then((json) => {
+                dispatch(tracksActions.fetchTracksSuccess(json));
+                resolve(json);
+            }).catch((error) => {
+                dispatch(tracksActions.fetchTracksError());
+                reject(error);
+            });
+        });
+    };
 };

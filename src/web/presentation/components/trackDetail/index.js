@@ -12,8 +12,8 @@ class TrackDetail extends React.Component {
     componentDidMount() {
         if (this.props.track === null) {
             this.props.getTrackWithId(`${this.props.match.params.track_id}`).then((track) => {
-                this.props.fetchTrack(track)
-            })
+                this.props.fetchTrack(track);
+            });
         }
     }
 
@@ -27,7 +27,7 @@ class TrackDetail extends React.Component {
                 <p>{this.props.track.title}</p>
                 <img src={this.props.track.artwork_url}/>
             </div>
-        )
+        );
     }
 }
 
@@ -43,7 +43,7 @@ TrackDetail.propTypes = {
 const mapStateToProps = (state, props) => {
     return {
         track: state.tracks.selectedTrack
-    }
+    };
 };
 
 const mapDispatchToProps = {

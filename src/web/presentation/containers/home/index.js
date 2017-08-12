@@ -4,7 +4,7 @@
 
 import HomePage from './home'
 import { connect } from 'react-redux';
-import { tracksActions, getTracks } from './../../../infrastructure/data/actions/tracks';
+import { tracksActions, getTracks, getSearchTracks } from './../../../infrastructure/data/actions/tracks';
 import { playerActions } from './../../../infrastructure/data/actions/player';
 
 
@@ -17,11 +17,12 @@ const mapStateToProps = (state) => {
         isLoading: state.tracks.isLoading,
         tracks: state.tracks.tracks,
         currentTrack: state.player.track
-    }
+    };
 };
 
 const mapDispatchToProps = {
     getFeaturedTracks: getTracks,
+    onSearchSubmit: getSearchTracks,
     loadFeaturedTracks: tracksActions.fetchTracks,
     fetchTracksSuccess: tracksActions.fetchTracksSuccess,
     fetchTracksError: tracksActions.fetchTracksError,

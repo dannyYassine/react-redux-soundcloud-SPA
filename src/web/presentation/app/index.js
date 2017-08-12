@@ -13,7 +13,7 @@ class App extends React.Component {
                 <Player/>
                 {this.props.children}
             </div>
-        )
+        );
     }
 }
 

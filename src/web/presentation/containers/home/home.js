@@ -8,18 +8,35 @@ import TracksList from './../../components/tracksList';
 
 class HomePage extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.queryString = "";
+    }
+
     componentDidMount() {
         this.props.loadFeaturedTracks();
-        this.props.getFeaturedTracks()
+        this.props.getFeaturedTracks();
     }
 
     onTrackClicked(track) {
         this.props.selectedTrack(track);
-        this.props.history.push(`/tracks/${track.id}`)
+        this.props.history.push(`/tracks/${track.id}`);
     };
 
     onTrackPlayClicked(track) {
         this.props.playSelectedTrack(track);
+    };
+
+    onSubmitSearch(e) {
+        e.preventDefault();
+        if (this.queryString === "") { return; }
+
+        this.props.onSearchSubmit(this.queryString);
+        this.props.loadFeaturedTracks();
+    };
+
+    onSearchInputChanged(e) {
+        this.queryString = e.target.value;
     };
 
     player() {
@@ -27,19 +44,21 @@ class HomePage extends React.Component {
             <div>
                 {this.props.currentTrack.title}
             </div>
-        )
+        );
     }
 
     render() {
 
-        let player = this.props.currentTrack === null ? (<div/>) : (this.player());
-
         return(
             <div>
+                <br/>
+                <form  onSubmit={this.onSubmitSearch.bind(this)}>
+                    <input type="text" placeholder="search tracks" onChange={this.onSearchInputChanged.bind(this)}/>
+                </form>
+
                 <div>
                     {this.props.isLoading ? <h1>LOADING</h1> : null}
                 </div>
-
                 <h1>Tracks</h1>
                 <TracksList
                     tracks={this.props.tracks}
@@ -47,7 +66,7 @@ class HomePage extends React.Component {
                     onTrackPlayClicked={this.onTrackPlayClicked.bind(this)}
                 />
             </div>
-        )
+        );
     }
 }
 

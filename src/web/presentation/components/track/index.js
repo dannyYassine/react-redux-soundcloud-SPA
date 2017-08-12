@@ -20,7 +20,7 @@ const Track = props => {
                 <h4>PLAY</h4>
             </div>
         </div>
-    )
+    );
 };
 
 Track.propTypes = {
