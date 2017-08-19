@@ -8,6 +8,14 @@ import PropTypes from 'prop-types';
 
 export default class AudioPlayer extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            willDisappear: false
+        };
+    }
+
     onProgressMouseDown(evt) {
         var e = evt.target;
         var dim = e.getBoundingClientRect();
@@ -16,11 +24,25 @@ export default class AudioPlayer extends React.Component {
         this.props.onSeekedAtPosition(x/dim.width);
     };
 
+    onDisappear() {
+        console.log(this.state.willDisappear);
+        return this.state.willDisappear ? "player-animate-out" : "player-animate-in";
+    }
+
+    onStopClicked() {
+        this.setState({
+            willDisappear: true
+        });
+        setTimeout(() => {
+            this.props.onStopClicked();
+        }, 750);
+    }
+
     render() {
         const { track, currentTime, duration } = this.props;
 
         return (
-            <div>
+            <div id="player" className={this.onDisappear()}>
                 <p>{track.title}</p>
                 <img
                     src={track.artwork_url}
@@ -28,11 +50,11 @@ export default class AudioPlayer extends React.Component {
                     height="40"
                 />
                 <progress id="seekbar" value={currentTime / duration} max="1" width={400} onClick={this.onProgressMouseDown.bind(this)}/>
-                <h6>{`${currentTime} : ${duration}`}</h6>
+                <h6 className="player-button">{`${currentTime} : ${duration}`}</h6>
 
-                <div onClick={this.props.onPlayClicked}>PLAY</div>
-                <div onClick={this.props.onPauseClicked}>PAUSE</div>
-                <div onClick={this.props.onStopClicked}>STOP</div>
+                <div className="player-button" onClick={this.props.onPlayClicked}>PLAY</div>
+                <div className="player-button" onClick={this.props.onPauseClicked}>PAUSE</div>
+                <div className="player-button" onClick={this.onStopClicked.bind(this)}>STOP</div>
 
                 {/*<ProgressBar/>*/}
                 {/*<Button/>*/}

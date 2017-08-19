@@ -11,7 +11,9 @@ class App extends React.Component {
         return(
             <div>
                 <Player/>
-                {this.props.children}
+                <div id="app-content" className="app-content-style">
+                    {this.props.children}
+                </div>
             </div>
         );
     }
